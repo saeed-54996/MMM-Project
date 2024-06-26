@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = SQLALCHEMY_TRACK_MODIFICATIONS
 db = SQLAlchemy(app)
 Migrate = Migrate(app , db)
 
-from model import User
+from model import *
 
 @app.route('/')
 def home():
