@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-@app.route('/mmad')
+@app.route('/')
 def hello_world():
     return 'Hello, World!'
 
