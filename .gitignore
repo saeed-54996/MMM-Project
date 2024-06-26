@@ -1,1 +1,7 @@
 my_flask_app/db_config.py
+my_flask_app/migrations/alembic.ini
+my_flask_app/migrations/env.py
+my_flask_app/migrations/README
+my_flask_app/migrations/script.py.mako
+my_flask_app/__pycache__/app.cpython-310.pyc
+my_flask_app/__pycache__/db_config.cpython-310.pyc
