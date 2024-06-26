@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Article</title>
-<link rel="stylesheet" href="styles.css">
-<script src="script.js" defer></script>
-</head>
-<body>
+{% extends "base.html" %}
 
-<header id="header">
-    <ul id="menu">
-        <li id="home"><a href="home.html">Home</a></li>
-        <li id="image"><a href="image.html">Picture</a></li>
-        <li id="article"><a href="article.html">Article</a></li>
-        <li id="writer-photographer"><a href="writer-photographer.html">Writer/photographer</a></li>
-    </ul>
-</header>
+{% block head %}
+<title>Article</title>
+{% endblock %}
+
+{% block body %}
 
 <main id="main-content">
     <h1 id="main-title">Article</h1>
@@ -60,9 +48,4 @@
     <button id="add-row-article">افزودن ردیف</button>
 </main>
 
-<footer id="footer">
-    <p id="footer-text"> تمامی حقوق محفوظ است </p>
-</footer>
-
-</body>
-</html>
+{% endblock %}
