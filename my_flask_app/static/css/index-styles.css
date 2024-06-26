@@ -1,0 +1,14 @@
+
+
+.main-content {
+    padding: 20px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.main-title {
+    background-color: orange;
+    border: 2px solid #fdfdfd;
+    padding: 10px;
+}

@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 
 {% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/article-styles.css') }}">
 <title>Article</title>
 {% endblock %}
 
 {% block body %}
 
-<main id="main-content">
-    <h1 id="main-title">Article</h1>
-    <div id="table-container">
-        <table id="article-table">
+<main class="main-content">
+    <h1 class="main-title">Article</h1>
+    <div class="table-container">
+        <table class="article-table">
             <thead>
                 <tr>
                     <th>Code</th>
@@ -28,8 +29,8 @@
                     <td>2024-06-26</td>
                     <td>Sample Category</td>
                     <td>
-                        <button class="edit-button">ویرایش</button>
-                        <button class="delete-button">حذف</button>
+                        <button class="button">ویرایش</button>
+                        <button class="button danger">حذف</button>
                     </td>
                 </tr>
                 <tr>
@@ -45,7 +46,7 @@
             </tbody>
         </table>
     </div>
-    <button id="add-row-article">افزودن ردیف</button>
+    <!-- <button id="add-row-article">افزودن ردیف</button> -->
 </main>
 
 {% endblock %}

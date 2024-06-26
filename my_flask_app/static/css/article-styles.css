@@ -1,0 +1,89 @@
+
+.main-content {
+    padding: 20px;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.main-title {
+    background-color: orange;
+    border: 2px solid #fdfdfd;
+    padding: 10px;
+}
+
+
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.info-table, .article-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+
+.button{
+    padding: 5px 10px;
+    background-color: #f0ad4e;
+    color: #fdfdfd;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+.add-row, .add-row-article, .add-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #5da3f8;
+    color: #fdfdfd;
+    border: none;
+    cursor: pointer;
+}
+
+
+.add-row:hover, .add-row-article:hover, .add-button:hover {
+    background-color: #4a8cd4;
+    border-radius: 5px;
+    /* padding: 10px; */  
+}
+
+.info-table th, .info-table td, .article-table th, .article-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.info-table th, .article-table th {
+    background-color: #5da3f8;
+    color: #fdfdfd;
+}
+
+.info-table a, .article-table a {
+    color: #5da3f8;
+    text-decoration: none;
+}
+
+.primary-button{
+    padding: 5px 10px;
+    background-color: #0572f7;
+    color: #fdfdfd;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.button:hover {
+    background-color: #eea236;
+}
+
+.danger {
+    background-color: #d32f2f;
+}
