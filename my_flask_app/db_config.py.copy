@@ -1,0 +1,19 @@
+# db_config.py
+
+import os
+
+# Database configuration
+DATABASE = {
+    'user': 'mmm-user',
+    'password': 'PASSWORD',
+    'host': 'HOST',
+    'port': '3306',
+    'database': 'mmm'
+}
+
+SQLALCHEMY_DATABASE_URI = (
+    f"mysql+pymysql://{DATABASE['user']}:{DATABASE['password']}@"
+    f"{DATABASE['host']}:{DATABASE['port']}/{DATABASE['database']}"
+)
+
+SQLALCHEMY_TRACK_MODIFICATIONS = False
