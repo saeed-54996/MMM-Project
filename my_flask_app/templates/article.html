@@ -7,46 +7,52 @@
 
 {% block body %}
 
-<main class="main-content">
-    <h1 class="main-title">Article</h1>
-    <div class="table-container">
-        <table class="article-table">
+<main class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-6 text-center">Article</h1>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
             <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Actions</th>
+                <tr class="border-b border-black hover:bg-gray-800">
+                <tr class="bg-gray-400 text-black- font-bold uppercase text-sm leading-normal">
+                    <th class="py-3 px-6 text-left">Code</th>
+                    <th class="py-3 px-6 text-left">Title</th>
+                    <th class="py-3 px-6 text-left">Author</th>
+                    <th class="py-3 px-6 text-left">Date</th>
+                    <th class="py-3 px-6 text-left">Category</th>
+                    <th class="py-3 px-6 text-left">Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><a href="#">Sample Title</a></td>
-                    <td>John Doe</td>
-                    <td>2024-06-26</td>
-                    <td>Sample Category</td>
-                    <td>
-                        <button class="button">ویرایش</button>
-                        <button class="button danger">حذف</button>
-                    </td>
+            <tbody class="text-gray-700 text-sm font-semibold">
+                <tr class="border-b border-black hover:bg-gray-300">
+                    <td class="py-3 px-6 text-left whitespace-nowrap">1</td>
+                    <td class="py-3 px-6 text-left"><a href="#" class="text-blue-500 hover:underline">Sample Title</a></td>
+                    <td class="py-3 px-6 text-left">John Doe</td>
+                    <td class="py-3 px-6 text-left">2024-06-26</td>
+                    <td class="py-3 px-6 text-left">Sample Category</td>
+                    <td class="py-3 px-6 text-left">
+                        <button class="bg-blue-500 flex flex-wrap text-white py-1 px-3 rounded hover:bg-blue-900">
+                            <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>Show
+                        </button>
+                
                 </tr>
-                <tr>
-                    <td><input type="text" name="code"></td>
-                    <td><input type="text" name="title"></td>
-                    <td><input type="text" name="author"></td>
-                    <td><input type="text" name="date"></td>
-                    <td><input type="text" name="category"></td>
-                    <td>
-                        <button class="add-button">افزودن</button>
+            </tbody>
+
+            <tbody class="text-gray-700 text-sm font-semibold">
+                <tr class="border-b border-black hover:bg-gray-300">
+                    <td class="py-3 px-6 text-left whitespace-nowrap">2</td>
+                    <td class="py-3 px-6 text-left"><a href="#" class="text-blue-500 hover:underline">Sample Title</a></td>
+                    <td class="py-3 px-6 text-left">John Doe</td>
+                    <td class="py-3 px-6 text-left">2024-06-26</td>
+                    <td class="py-3 px-6 text-left">Sample Category</td>
+                    <td class="py-3 px-6 text-left">
+                        <button class="bg-blue-500 flex flex-wrap text-white py-1 px-3 rounded hover:bg-blue-900">
+                            <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>Show
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <!-- <button id="add-row-article">افزودن ردیف</button> -->
 </main>
 
 {% endblock %}
