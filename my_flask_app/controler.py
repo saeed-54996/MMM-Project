@@ -61,45 +61,53 @@ def user_profile():
     return render_template('my-profile.html')
 
 def upload_photo():
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            flash('No file part', 'error')
-            return redirect(request.url)
-        
-        file = request.files['file']
-        custom_filename = request.form.get('custom_filename')
-        description = request.form.get('description')
-        category = request.form.get('category')
-        tags = request.form.get('tags')
-        if file.filename == '':
-            flash('No selected file', 'error')
-            return redirect(request.url)
-        
-        if file and allowed_file(file.filename):
-            if custom_filename:
-                filename = custom_filename + os.path.splitext(file.filename)[1]
+    if  not 'user_id' in session:
+        flash('user is not loged in')
+        return redirect(url_for('login_route'))
+
+
+    else:
+        if request.method == 'POST':
+            if 'file' not in request.files:
+                flash('No file part', 'error')
+                return redirect(request.url)
+            
+            
+            file = request.files['file']
+            custom_filename = request.form.get('custom_filename')
+            description = request.form.get('description')
+            category = request.form.get('category')
+            tags = request.form.get('tags')
+            if file.filename == '':
+                flash('No selected file', 'error')
+                return redirect(request.url)
+            
+            
+            if file and allowed_file(file.filename):
+                if custom_filename:
+                    filename = custom_filename + os.path.splitext(file.filename)[1]
+                else:
+                    filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+                
+                filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                file.save(filepath)
+                
+                new_image = Images(
+                    path=filename,
+                    title=custom_filename or filename,
+                    description=description,
+                    category=category,
+                    tags=tags,
+                    user_id = session['user_id']
+                )
+                db.session.add(new_image)
+                db.session.commit()
+                
+                flash('File successfully uploaded', 'success')
+                return redirect(url_for('upload_route'))
             else:
-                filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
-            
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(filepath)
-            
-            new_image = Images(
-                path=filename,
-                title=custom_filename or filename,
-                description=description,
-                category=category,
-                tags=tags,
-                user_id = session['user_id']
-            )
-            db.session.add(new_image)
-            db.session.commit()
-            
-            flash('File successfully uploaded', 'success')
-            return redirect(url_for('upload_route'))
-        else:
-            flash('File type not allowed', 'error')
-            return redirect(request.url)
+                flash('File type not allowed', 'error')
+                return redirect(request.url)
     return render_template('upload.html')
 
 def allowed_file(filename):
