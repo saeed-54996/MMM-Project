@@ -1,7 +1,7 @@
 from flask import *
 from init import app, db 
 from model import *
-from controler import login, signup ,upload_photo
+from controler import login, signup ,upload_photo,user_profile
 
 @app.route('/')
 def home():
@@ -22,6 +22,10 @@ def logout():
     session.pop('email', None)
     session.pop('user_id', None)
     return redirect(url_for('home'))
+
+@app.route('/my-profile/')
+def my_profile():
+    return user_profile()
 
 @app.route('/pictures/')
 def pictures():

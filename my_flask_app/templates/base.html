@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fa">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,50 +10,63 @@
     <script src="{{ url_for('static', filename='scripts/script.js') }}" defer></script>
     {% block head %}{% endblock %}
 </head>
+
 <body class="bg-gray-100 flex flex-col min-h-screen">
 
-<header class="bg-white shadow-md py-4">
-    <nav class="container mx-auto px-4 flex justify-between items-center">
-        <div class="flex items-center space-x-4">
-            <a href="/" class="text-lg font-bold text-gray-700 hover:text-gray-900">MMM-Project</a>
-            <div class="h-6 border-r border-gray-300 mx-2"></div>
-            <a href="/" class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
-                <iconify-icon icon="clarity:home-solid" class="mr-1" width="1.4rem"></iconify-icon> Home
-            </a>
-            <a href="/pictures" class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
-                <iconify-icon icon="jam:picture-f" class="mr-1" width="1.4rem"></iconify-icon> Pictures
-            </a>
-            <a href="/article" class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
-                <iconify-icon icon="ic:round-article" class="mr-1" width="1.4rem"></iconify-icon> Articles
-            </a>
-            <a href="/writer-photographer" class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
-                <iconify-icon icon="f7:person-2-alt" class="mr-1" width="1.4rem"></iconify-icon> Writers/Photographers
-            </a>
-        </div>
-        <div class="flex items-center">
-            {% if 'email' in session %}
-                <span class="text-lg font-semibold text-gray-700 mr-4">{{ session['email'] }}</span>
-                <a href="{{ url_for('logout') }}" class="bg-red-500 flex items-center text-white px-4 py-2 rounded-lg hover:bg-red-700">
+    <header class="bg-white shadow-md py-4">
+        <nav class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <a href="/" class="text-lg font-bold text-gray-700 hover:text-gray-900">MMM-Project</a>
+                <div class="h-6 border-r border-gray-300 mx-2"></div>
+                <a href="/"
+                    class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
+                    <iconify-icon icon="clarity:home-solid" class="mr-1" width="1.4rem"></iconify-icon> Home
+                </a>
+                <a href="/pictures"
+                    class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
+                    <iconify-icon icon="jam:picture-f" class="mr-1" width="1.4rem"></iconify-icon> Pictures
+                </a>
+                <a href="/article"
+                    class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
+                    <iconify-icon icon="ic:round-article" class="mr-1" width="1.4rem"></iconify-icon> Articles
+                </a>
+                <a href="/writer-photographer"
+                    class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
+                    <iconify-icon icon="f7:person-2-alt" class="mr-1" width="1.4rem"></iconify-icon>
+                    Writers/Photographers
+                </a>
+            </div>
+            <div class="flex gap-2 items-center">
+                {% if 'email' in session %}
+                <a href="{{ url_for('my_profile') }}"
+                    class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
+                    <iconify-icon icon="f7:person-2-alt" class="mr-1" width="1.4rem"></iconify-icon> 
+                    {{ session['name'] }}
+                </a>
+                <a href="{{ url_for('logout') }}"
+                    class="bg-red-500 flex items-center text-white px-4 py-2 rounded-lg hover:bg-red-700">
                     <iconify-icon icon="ooui:log-out-rtl" class="mr-1" width="1.4rem"></iconify-icon>Logout
                 </a>
-            {% else %}
-                <a href="{{ url_for('login_route') }}" class="bg-blue-500  flex text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                {% else %}
+                <a href="{{ url_for('login_route') }}"
+                    class="bg-blue-500  flex text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                     <iconify-icon icon="ic:twotone-log-in" class="mr-1" width="1.4rem"></iconify-icon>Login
                 </a>
-            {% endif %}
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-6">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2024 MMM_PROJECT™ All Rights Reserved.</p>
         </div>
-    </nav>
-</header>
-
-<main class="flex-grow container mx-auto px-4 py-6">
-    {% block body %}{% endblock %}
-</main>
-
-<footer class="bg-gray-800 text-white py-4">
-    <div class="container mx-auto px-4 text-center">
-        <p>© 2024 MMM_PROJECT™ All Rights Reserved.</p>
-    </div>
-</footer>
+    </footer>
 
 </body>
+
 </html>

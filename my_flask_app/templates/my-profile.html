@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index-styles.css') }}">
+<title>Home</title>
+{% endblock %}
+
+{% block body %}
+
+<main class="main-content">
+    <h1 class="main-title text-lg font-bold">Welcome to the profile Page</h1>
+    <p>
+        {% if session['email'] and session['user_id'] %}
+            Logged in as: {{ session['email'] }} (User ID: {{ session['user_id'] }})
+        {% else %}
+            You are not logged in.
+        {% endif %}
+    </p>
+</main>
+
+{% endblock %}

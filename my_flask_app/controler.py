@@ -20,6 +20,7 @@ def login():
         if user and check_md5_hash(password, user.password):
             session['email'] = user.email
             session['user_id'] = user.id
+            session['name'] = user.name
             return redirect(url_for('home'))
         else:
             flash('Invalid email or password', 'error')
@@ -47,9 +48,17 @@ def signup():
             db.session.commit()
             session['email'] = new_user.email
             session['user_id'] = new_user.id
+            session['name'] = new_user.name
             return redirect(url_for('home'))
     
     return render_template('signup.html')
+
+def user_profile():
+    if 'email' in session:
+        pass
+    else:
+        return redirect(url_for('login_route'))
+    return render_template('my-profile.html')
 
 def upload_photo():
     if request.method == 'POST':
