@@ -1,24 +1,24 @@
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('/fonts/Vazirmatn-Black.ttf') format('truetype');
+    src: url('{{ url_for('static', filename='css/fonts/Vazirmatn-Black.ttf') }}') format('truetype');
     font-weight: 800;
     font-style: normal;
 }
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('/fonts/Vazirmatn-Bold.ttf') format('truetype');
+    src: url('{{ url_for('static', filename='css/fonts/Vazirmatn-Bold.ttf') }}') format('truetype');
     font-weight: 600;
     font-style: normal;
 }
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('/fonts/Vazirmatn-Regular.ttf') format('truetype');
+    src: url('{{ url_for('static', filename='css/fonts/Vazirmatn-Regular.ttf') }}') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 @font-face {
     font-family: 'Vazirmatn';
-    src: url('/fonts/Vazirmatn-Light.ttf') format('truetype');
+    src: url('{{ url_for('static', filename='css/fonts/Vazirmatn-Light.ttf') }}') format('truetype');
     font-weight: 200;
     font-style: normal;
 }
