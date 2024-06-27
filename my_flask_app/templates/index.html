@@ -9,6 +9,13 @@
 
 <main class="main-content">
     <h1 class="main-title">Welcome to the Home Page</h1>
+    <p>
+        {% if email and user_id %}
+            Logged in as: {{ email }} (User ID: {{ user_id }})
+        {% else %}
+            You are not logged in.
+        {% endif %}
+    </p>
 </main>
 
 {% endblock %}
