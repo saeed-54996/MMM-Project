@@ -66,7 +66,7 @@ def show_pictures():
         images = Images.query.all()
         categories = Categories.query.all()
     else:
-        images = Images.query.filter_by(category=category_filter)
+        images = Images.query.filter_by(category_id=category_filter)
         categories = Categories.query.all()
     return render_template('pictures.html',images=images,categories=categories)
 
