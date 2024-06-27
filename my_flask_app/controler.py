@@ -73,7 +73,7 @@ def show_pictures():
 def show_single_picture(picture_id):
     image = Images.query.filter_by(id=picture_id).first()
     name = image.user.name if image.user else 'Unknown User'
-    return render_template('picture.html',path=image.path,title=image.title,des=image.description,category=image.category,tags=image.tags,name=name)
+    return render_template('picture.html',path=image.path,title=image.title,des=image.description,category=image.category.name,tags=image.tags,name=name)
 
 def submit_article():
     if 'user_id' not in session:
@@ -93,7 +93,7 @@ def submit_article():
         new_article = Articles(
             title=title,
             content=content,
-            category=category,
+            category_id=category,
             keywords=keywords,
             user_id=session['user_id']
         )
@@ -119,7 +119,7 @@ def upload_photo():
             
             
             file = request.files['file']
-            custom_filename = request.form.get('custom_filename')
+            title = request.form.get('title')
             description = request.form.get('description')
             category = request.form.get('category')
             tags = request.form.get('tags')
@@ -129,19 +129,16 @@ def upload_photo():
             
             
             if file and allowed_file(file.filename):
-                if custom_filename:
-                    filename = custom_filename + os.path.splitext(file.filename)[1]
-                else:
-                    filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
-                
+                filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+                filetitle = os.path.splitext(file.filename)[0]
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 file.save(filepath)
                 
                 new_image = Images(
                     path=filename,
-                    title=custom_filename or filename,
+                    title=title or filetitle,
                     description=description,
-                    category=category,
+                    category_id=category,
                     tags=tags,
                     user_id = session['user_id']
                 )
@@ -153,7 +150,8 @@ def upload_photo():
             else:
                 flash('File type not allowed', 'error')
                 return redirect(request.url)
-    return render_template('upload.html')
+    categories = Categories.query.all()
+    return render_template('upload.html',categories=categories)
 
 
 def allowed_file(filename):
