@@ -1,28 +1,42 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-<script src="{{ url_for('static', filename='scripts/script.js') }}" defer></script>
-{% block head %}{% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='scripts/script.js') }}" defer></script>
+    {% block head %}{% endblock %}
 </head>
-<body>
+<body class="bg-gray-100 flex flex-col min-h-screen">
 
-<header class="header">
-   <nav>
-    <ul class="nav">
-        <li><a href="/">Home</a></li>
-        <li><a href="/picture">Picture</a></li>
-        <li><a href="/article">Article</a></li>
-        <li><a href="/writer-photographer">Writer/photographer</a></li>
-    </ul>
+<header class="bg-white shadow-md py-4">
+   <nav class="container mx-auto px-4 flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+            <a href="/" class="text-lg font-semibold text-gray-700">Home</a>
+            <a href="/picture" class="text-lg font-semibold text-gray-700">Picture</a>
+            <a href="/article" class="text-lg font-semibold text-gray-700">Article</a>
+            <a href="/writer-photographer" class="text-lg font-semibold text-gray-700">Writer/Photographer</a>
+        </div>
+        <div>
+            {% if 'email' in session %}
+                <span class="text-lg font-semibold text-gray-700 mr-4">{{ session['email'] }}</span>
+                <a href="{{ url_for('logout') }}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login_route') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Login</a>
+            {% endif %}
+        </div>
    </nav>
 </header>
 
-{% block body %}{% endblock %}
-<footer class="footer">
-    <p> © 2024 MMM_PROJECT™ All Rights Reserved.</p>
+<main class="flex-grow container mx-auto px-4 py-6">
+    {% block body %}{% endblock %}
+</main>
+
+<footer class="bg-gray-800 text-white py-4">
+    <div class="container mx-auto px-4 text-center">
+        <p>© 2024 MMM_PROJECT™ All Rights Reserved.</p>
+    </div>
 </footer>
 
 </body>
