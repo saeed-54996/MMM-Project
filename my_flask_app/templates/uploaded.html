@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block title %}Uploaded Image{% endblock %}
+
+{% block content %}
+    <h2>Uploaded Image</h2>
+    <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Image">
+{% endblock %}

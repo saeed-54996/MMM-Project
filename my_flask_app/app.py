@@ -1,7 +1,7 @@
 from flask import *
-from init import app, db
+from init import app, db 
 from model import *
-from controler import login, signup
+from controler import login, signup ,upload_photo
 
 @app.route('/')
 def home():
@@ -38,5 +38,9 @@ def article():
 def writer_photographer():
     return render_template('writer-photographer.html')
 
+@app.route('/upload/', methods=['GET', 'POST'])
+def upload_route():
+    return upload_photo()
+
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5001, debug=True)
