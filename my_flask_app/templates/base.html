@@ -5,18 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
     <script src="{{ url_for('static', filename='scripts/script.js') }}" defer></script>
     {% block head %}{% endblock %}
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
 
 <header class="bg-white shadow-md py-4">
-   <nav class="container mx-auto px-4 flex justify-between items-center">
+    <nav class="container mx-auto px-4 flex justify-between items-center">
         <div class="flex items-center space-x-4">
-            <a href="/" class="text-lg font-semibold text-gray-700">Home</a>
-            <a href="/picture" class="text-lg font-semibold text-gray-700">Picture</a>
-            <a href="/article" class="text-lg font-semibold text-gray-700">Article</a>
-            <a href="/writer-photographer" class="text-lg font-semibold text-gray-700">Writer/Photographer</a>
+            <a href="/" class="text-lg font-bold text-gray-700 hover:text-gray-900">MMM-Project</a>
+            <div class="h-6 border-r border-gray-300 mx-2"></div>
+            <a href="/" class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
+                <iconify-icon icon="ic:round-home" class="mr-1" style="width: 1.4rem;"></iconify-icon> Home
+            </a>
+            <a href="/pictures" class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
+                <iconify-icon icon="ic:round-home" class="mr-1" style="width: 1.4rem;"></iconify-icon> Picture
+            </a>
+            <a href="/article" class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
+                <iconify-icon icon="ic:round-home" class="mr-1" style="width: 1.4rem;"></iconify-icon> Article
+            </a>
+            <a href="/writer-photographer" class="text-lg font-semibold text-gray-700 flex items-center border border-gray-300 px-2 py-1 rounded-lg transition duration-300 hover:bg-black hover:text-white hover:border-black">
+                <iconify-icon icon="ic:round-home" class="mr-1" style="width: 1.4rem;"></iconify-icon> Writer/Photographer
+            </a>
         </div>
         <div>
             {% if 'email' in session %}
@@ -26,7 +37,7 @@
                 <a href="{{ url_for('login_route') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Login</a>
             {% endif %}
         </div>
-   </nav>
+    </nav>
 </header>
 
 <main class="flex-grow container mx-auto px-4 py-6">
