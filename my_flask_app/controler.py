@@ -1,6 +1,6 @@
 from flask import request, session, redirect, url_for, render_template, flash
 import hashlib
-from model import db, Users, Images
+from model import db, Users, Images, Articles
 import os
 from init import app
 import uuid
@@ -60,6 +60,36 @@ def user_profile():
         return redirect(url_for('login_route'))
     return render_template('my-profile.html')
 
+def submit_article():
+    if 'user_id' not in session:
+        flash('You need to be logged in to submit an article', 'error')
+        return redirect(url_for('login_route'))
+    
+    if request.method == 'POST':
+        title = request.form.get('title')
+        content = request.form.get('content')
+        category = request.form.get('category')
+        keywords = request.form.get('keywords')
+        
+        if not title or not content:
+            flash('Title and content are required', 'error')
+            return redirect(url_for('submit_article_route'))
+        
+        new_article = Articles(
+            title=title,
+            content=content,
+            category=category,
+            keywords=keywords,
+            user_id=session['user_id']
+        )
+        db.session.add(new_article)
+        db.session.commit()
+        
+        flash('Article successfully submitted', 'success')
+        return redirect(url_for('submit_article_route'))
+    
+    return render_template('submit_article.html')
+
 def upload_photo():
     if  not 'user_id' in session:
         flash('user is not loged in')
@@ -109,6 +139,7 @@ def upload_photo():
                 flash('File type not allowed', 'error')
                 return redirect(request.url)
     return render_template('upload.html')
+
 
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
