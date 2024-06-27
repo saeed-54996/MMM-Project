@@ -1,6 +1,6 @@
 from flask import request, session, redirect, url_for, render_template, flash
 import hashlib
-from model import db, Users, Images, Articles
+from model import db, Users, Images, Articles,Categories
 import os
 from init import app
 import uuid
@@ -61,8 +61,14 @@ def user_profile():
     return render_template('my-profile.html')
 
 def show_pictures():
-    images = Images.query.all()
-    return render_template('pictures.html',images=images)
+    category_filter = request.args.get('category', 'all')
+    if(category_filter=="all"):
+        images = Images.query.all()
+        categories = Categories.query.all()
+    else:
+        images = Images.query.filter_by(category=category_filter)
+        categories = Categories.query.all()
+    return render_template('pictures.html',images=images,categories=categories)
 
 def show_single_picture(picture_id):
     image = Images.query.filter_by(id=picture_id).first()

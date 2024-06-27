@@ -27,7 +27,7 @@ def logout():
 def my_profile():
     return user_profile()
 
-@app.route('/pictures/')
+@app.route('/pictures/',methods=['GET'])
 def pictures():
     return show_pictures()
 
