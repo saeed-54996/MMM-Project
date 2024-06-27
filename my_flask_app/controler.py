@@ -64,6 +64,11 @@ def show_pictures():
     images = Images.query.all()
     return render_template('pictures.html',images=images)
 
+def show_single_picture(picture_id):
+    image = Images.query.filter_by(id=picture_id).first()
+    name = image.user.name if image.user else 'Unknown User'
+    return render_template('picture.html',path=image.path,title=image.title,des=image.description,category=image.category,tags=image.tags,name=name)
+
 def submit_article():
     if 'user_id' not in session:
         flash('You need to be logged in to submit an article', 'error')
