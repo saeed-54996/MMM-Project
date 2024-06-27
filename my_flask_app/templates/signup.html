@@ -5,10 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
 </head>
 <body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="w-full max-w-md md:max-w-xs bg-white p-6 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-bold mb-4 text-center">Sign Up</h2>
+        <a href="{{ url_for('home') }}" class="text-gray-900 hover:text-black-700 text-sm font-bold inline-flex items-center mb-5">
+            <iconify-icon icon="ic:round-arrow-back" width="1.8rem" class="mr-2"></iconify-icon>
+            Home
+        </a>
+        <h2 class="text-2xl font-bold mb-4 text-center flex items-center justify-center">
+            <iconify-icon icon="jam:write" width="1.8rem" class="mr-2"></iconify-icon>
+            Sign Up
+        </h2>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
