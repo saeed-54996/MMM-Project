@@ -24,6 +24,7 @@ def login():
 
 def signup():
     if request.method == 'POST':
+        name = request.form['name']
         email = request.form['email']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
@@ -37,7 +38,7 @@ def signup():
             flash('Email address already exists', 'error')
             return render_template('signup.html')
         else:
-            new_user = Users(email=email, password=generate_md5_hash(password))
+            new_user = Users(name=name, email=email, password=generate_md5_hash(password))
             db.session.add(new_user)
             db.session.commit()
             session['email'] = new_user.email
