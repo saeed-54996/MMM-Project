@@ -22,8 +22,12 @@ def logout():
     session.pop('email', None)
     return redirect(url_for('home'))
 
-@app.route('/picture/')
-def picture():
+@app.route('/pictures/')
+def pictures():
+    return render_template('pictures.html')
+
+@app.route('/picture/<picture_id>/')
+def picture(picture_id):
     return render_template('picture.html')
 
 @app.route('/article/')
