@@ -61,7 +61,8 @@ def user_profile():
     return render_template('my-profile.html')
 
 def show_pictures():
-    return render_template('pictures.html')
+    images = Images.query.all()
+    return render_template('pictures.html',images=images)
 
 def submit_article():
     if 'user_id' not in session:
