@@ -2,31 +2,29 @@ from init import db
 
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.String(5), unique=True, nullable=False)
-    author_and_photographer = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.Text, nullable=False)
-
-    def __repr__(self):
-        return f'<User {self.user_id}>'
+    name = db.Column(db.String(80), nullable=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.Text, nullable=True)
 
 class Articles(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(120), nullable=True)
     content = db.Column(db.Text, nullable=False)
-    keywords = db.Column(db.String(50))
-    title = db.Column(db.String(50))
-    category = db.Column(db.String(50))
-    writer_code = db.Column(db.String(50), nullable=False)
-    writer_name = db.Column(db.String(50), nullable=False)
-    writer_email = db.Column(db.String(50))
+    category = db.Column(db.String(50), nullable=True)
+    keywords = db.Column(db.Text, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-class Photographer(db.Model):
+class Images(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(50), nullable=False)
     path = db.Column(db.Text, nullable=False)
-    title = db.Column(db.String(50))
-    tag = db.Column(db.String(50))
-    description = db.Column(db.String(120))
-    category = db.Column(db.String(50))
-    photographer_code = db.Column(db.String(50), nullable=False)
-    photographer_name = db.Column(db.String(50), nullable=False)
-    photographer_email = db.Column(db.String(50))
+    description = db.Column(db.String(120), nullable=True)
+    category = db.Column(db.String(50), nullable=True)
+    tags = db.Column(db.String(50), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+class Categories(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(50), nullable=False, unique=True)
+    type = db.Column(db.String(50), nullable=False)
+    is_deleted = db.Column(db.Integer, default=0) 
