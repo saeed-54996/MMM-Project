@@ -16,6 +16,7 @@ def login():
         user = Users.query.filter_by(email=email).first()
         if user and check_md5_hash(password, user.password):
             session['email'] = user.email
+            session['user_id'] = user.id
             return redirect(url_for('home'))
         else:
             flash('Invalid email or password', 'error')
@@ -42,6 +43,7 @@ def signup():
             db.session.add(new_user)
             db.session.commit()
             session['email'] = new_user.email
+            session['user_id'] = new_user.id
             return redirect(url_for('home'))
     
     return render_template('signup.html')

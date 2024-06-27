@@ -5,8 +5,8 @@ from controler import login, signup
 
 @app.route('/')
 def home():
-    if 'email' in session:
-        return render_template('index.html', email=session['email'])
+    if 'email' in session and 'user_id' in session:
+        return render_template('index.html', email=session['email'], user_id=session['user_id'])
     return render_template('index.html')
 
 @app.route('/login/', methods=['GET', 'POST'])
@@ -20,6 +20,7 @@ def signup_route():
 @app.route('/logout/')
 def logout():
     session.pop('email', None)
+    session.pop('user_id', None)
     return redirect(url_for('home'))
 
 @app.route('/pictures/')
