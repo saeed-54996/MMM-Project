@@ -3,6 +3,7 @@ import hashlib
 from model import db, Users
 import os
 from init import app
+import uuid
 
 def generate_md5_hash(password):
     return hashlib.md5(password.encode()).hexdigest()
@@ -60,10 +61,11 @@ def upload_photo():
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            filename = file.filename
+            filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             flash('File successfully uploaded')
             return redirect(url_for('upload_route', filename=filename))
+        flash('ERROR! maybe a wrong extention?')
     return render_template('upload.html')
 
 def allowed_file(filename):
