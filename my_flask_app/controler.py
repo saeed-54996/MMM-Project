@@ -60,6 +60,9 @@ def user_profile():
         return redirect(url_for('login_route'))
     return render_template('my-profile.html')
 
+def show_pictures():
+    return render_template('pictures.html')
+
 def submit_article():
     if 'user_id' not in session:
         flash('You need to be logged in to submit an article', 'error')
