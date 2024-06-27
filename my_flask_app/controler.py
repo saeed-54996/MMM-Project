@@ -60,6 +60,10 @@ def user_profile():
         return redirect(url_for('login_route'))
     return render_template('my-profile.html')
 
+
+def show_pictures():
+    return render_template('pictures.html')
+
 def upload_photo():
     if  not 'user_id' in session:
         flash('user is not loged in')
