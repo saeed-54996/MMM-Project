@@ -1,7 +1,7 @@
 from flask import *
 from init import app, db 
 from model import *
-from controler import login, signup ,upload_photo,user_profile,show_pictures,show_single_picture,submit_article
+from controler import login, signup ,upload_photo,user_profile,show_pictures,show_single_picture,submit_article,is_admin
 
 @app.route('/')
 def home():
@@ -50,6 +50,11 @@ def upload_route():
 @app.route('/submit-article/', methods=['GET', 'POST'])
 def submit_article_route():
     return submit_article()
+
+@app.route('/admin/')
+def admin():
+    return is_admin()
+
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)

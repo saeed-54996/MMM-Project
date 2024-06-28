@@ -6,6 +6,7 @@ class Users(db.Model):
     name = db.Column(db.String(80), nullable=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.Text, nullable=True)
+    role = db.Column(db.String(50), nullable=False, default='user')
     articles = db.relationship('Articles', backref='user', lazy=True)
     images = db.relationship('Images', backref='user', lazy=True)
 

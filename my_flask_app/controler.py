@@ -4,6 +4,7 @@ from model import db, Users, Images, Articles,Categories
 import os
 from init import app
 import uuid
+import csv
 
 def generate_md5_hash(password):
     return hashlib.md5(password.encode()).hexdigest()
@@ -21,6 +22,7 @@ def login():
             session['email'] = user.email
             session['user_id'] = user.id
             session['name'] = user.name
+            session['role'] = user.role
             return redirect(url_for('home'))
         else:
             flash('Invalid email or password', 'error')
@@ -157,3 +159,16 @@ def upload_photo():
 def allowed_file(filename):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def is_admin():
+    if 'user_id' not in session:
+        flash('You need to be logged in to import articles', 'error')
+        return redirect(url_for('login_route'))
+    
+    if session.get('role') == 'admin':
+        return render_template('admin.html')
+    
+    flash('Your user is not an admin', 'error')
+    return redirect(url_for('my_profile'))
+
