@@ -5,22 +5,30 @@
 {% endblock %}
 
 {% block body %}
-
 <main class="main-content">
-    <h1 class="main-title text-lg font-bold">Welcome to the Admin Page</h1>
+    <h1 class="main-title text-lg font-bold text-center my-8">Welcome to the Admin Page</h1>
 </main>
-
+<a href="{{ url_for('my_profile') }}" class="text-gray-900 hover:text-black-700 text-lg font-bold inline-flex items-center ml-20 mb-5">
+    <iconify-icon icon="ic:round-arrow-back" width="1.8rem" class="mr-2"></iconify-icon>
+    Back to Dashboard
+</a>
 <div class="flex flex-wrap justify-center">
+    <a href="{{ url_for('manage_categoris_page') }}" class="w-full md:w-1/2 lg:w-1/3 p-4">
+        <div class="bg-white shadow-lg rounded-lg p-6 text-center h-full flex flex-col justify-center items-center transition-transform transform hover:scale-105">
+            <iconify-icon icon="ph:article-ny-times" width="5rem"></iconify-icon>
+            <div class="text-lg font-bold mt-4">Manage Categories</div>
+        </div>
+    </a>
     <form method="post" enctype="multipart/form-data" action="{{ url_for('csv_file_upload') }}" class="w-full md:w-1/2 lg:w-1/3 p-4">
-        <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-            <div class="icon-plus mb-4 text-gray-500"></div>
-            <iconify-icon icon="mingcute:plus-line" width="5rem"></iconify-icon>
-            <div class="text-lg font-bold mb-4">Upload Articles and Images CSV</div>
-            <label for="csv_file" class="block mb-2 text-sm font-medium text-gray-700">CSV FILE</label>
-            <input type="file" name="articles_file" id="articles_file" class="mt-2 mb-4" required>
-            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Upload</button>
+        <div class="bg-white shadow-lg rounded-lg p-6 text-center h-full flex flex-col justify-center items-center transition-transform transform hover:scale-105">
+            <iconify-icon icon="material-symbols:article-shortcut-outline-sharp" width="5rem"></iconify-icon>
+            <div class="text-lg font-bold mt-4 mb-4">Upload Articles and Images CSV</div>
+            <div>
+                <label for="csv_file" class="block mb-2 text-sm font-medium text-gray-700">CSV FILE</label>
+                <input type="file" name="articles_file" id="articles_file" class="mt-2 mb-4 block w-full text-sm text-gray-500 border border-gray-300 rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" required>
+                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Upload</button>
+            </div>
         </div>
     </form>
 </div>
-</main>
 {% endblock %}
