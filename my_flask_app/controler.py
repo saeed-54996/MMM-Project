@@ -279,10 +279,9 @@ def csv_upload():
             filename = secure_filename(file.filename)
             file.save(os.path.join('csv', filename))
             flash('File successfully uploaded', 'success')
-
-            if file_exist('csv','articles.csv'):
+            if filename == 'articles.csv':
                 upload_csv('article')
-            elif file_exist('csv','image.csv'):
+            if filename == 'images.csv':
                 upload_csv('image')
 
             return redirect(url_for('admin_page'))  # Ensure this redirects to a valid route
@@ -301,38 +300,55 @@ def file_exist(filepath,filename):
 def upload_csv(file):
     if file == 'article':
         temp_dict = read_csv_to_dict_list('csv/articles.csv')
-    else:
-        temp_dict = read_csv_to_dict_list('csv/images.csv')
-
-    for row in temp_dict:
-        if 'email' in row:
-            user = Users.query.filter_by(email=row['email']).first()
+        for row in temp_dict:
+            user = Users.query.filter_by(email=row['writer_email']).first()
             if not user:
                 name = row['writer_name']
-                email = row['email']
+                email = row['writer_email']
                 password = '123456'
 
                 new_user = Users(name=name, email=email, password=generate_md5_hash(password))
                 db.session.add(new_user)
                 db.session.commit()
-        else:
-            print(f"Missing 'email' key in row: {row}")
+                print
 
-    if file == 'article':
         for row in temp_dict:
-            if 'email' in row and 'title' in row and 'content' in row and 'category' in row and 'keyword' in row:
-                user = Users.query.filter_by(email=row['email']).first()
-                new_article = Articles(
+            user = Users.query.filter_by(email=row['writer_email']).first()
+            new_article = Articles(
+                title=row['title'],
+                content=row['content'],
+                keywords=row['keywords'],
+                user_id=user.id
+            )
+            db.session.add(new_article)
+            db.session.commit()
+
+
+
+    elif file == 'image':
+        temp_dict = read_csv_to_dict_list('csv/images.csv')
+
+        for row in temp_dict:
+            user = Users.query.filter_by(email=row['photographer_email']).first()
+            if not user:
+                name = row['writer_name']
+                email = row['writer_email']
+                password = '123456'
+
+                new_user = Users(name=name, email=email, password=generate_md5_hash(password))
+                db.session.add(new_user)
+                db.session.commit()
+            for row in temp_dict:
+                user = Users.query.filter_by(email=row['photographer_email']).first()
+                new_image = Images(
                     title=row['title'],
-                    content=row['content'],
-                    category_id=row['category'],
-                    keywords=row['keyword'],
+                    path=row['image_path'],
+                    tags=row['tags'],
+                    description=row['description'],
                     user_id=user.id
                 )
-                db.session.add(new_article)
+                db.session.add(new_image)
                 db.session.commit()
-            else:
-                print(f"Missing one or more required keys in row: {row}")
 
 
 
