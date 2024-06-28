@@ -62,14 +62,19 @@ def signup():
 
 
 #----------------------------------------profile and Admin system:
-def user_profile():
+def dashboard():
     if 'email' in session:
         pass
     else:
         return redirect(url_for('login_route'))
     return render_template('my-profile.html')
 
+def user_profile():
+    return 0
 
+def show_users():
+    users = Users.query.all()
+    return render_template('writer-photographer.html',users=users)
 
 
 #----------------------------------------image system:

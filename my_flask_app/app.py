@@ -1,7 +1,7 @@
 from flask import *
 from init import app, db 
 from model import *
-from controler import login, signup ,upload_photo,user_profile,show_pictures,show_single_picture,show_articles,show_single_article,submit_article,admin_panel
+from controler import login, signup ,upload_photo,dashboard,user_profile,show_pictures,show_single_picture,show_articles,show_single_article,show_users,submit_article,admin_panel
 
 @app.route('/')
 def home():
@@ -25,13 +25,16 @@ def logout():
 
 @app.route('/my-profile/')
 def my_profile():
-    return user_profile()
+    return dashboard()
 
 
-@app.route('/user/')
-def user_page():
-    return render_template('user.html')
+@app.route('/user/<usr_id>/')
+def user_page(usr_id):
+    return user_profile(usr_id)
 
+@app.route('/writer-photographer/')
+def writer_photographer_page():
+    return show_users()
 
 @app.route('/pictures/',methods=['GET'])
 def pictures():
@@ -49,9 +52,6 @@ def articles_page():
 def singel_article_page(article_id):
     return show_single_article(article_id)
 
-@app.route('/writer-photographer/')
-def writer_photographer():
-    return render_template('writer-photographer.html')
 
 @app.route('/upload/', methods=['GET', 'POST'])
 def upload_route():

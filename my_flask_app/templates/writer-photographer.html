@@ -20,40 +20,21 @@
                 </tr>
             </thead>
             <tbody class="text-gray-700 text-sm font-semibold">
+                {% for user in users %}
                 <tr class="border-b border-black hover:bg-gray-200">
-                    <td class="py-3 px-6 text-center whitespace-nowrap border-r">1</td>
-                    <td class="py-3 px-6 text-center border-r"><a href="#" class="text-blue-500 hover:underline">Arsalan</a></td>
-                    <td class="py-3 px-6 text-center border-r">Arsalan@example.com</td>
+                    <td class="py-3 px-6 text-center whitespace-nowrap border-r">{{ user.id }}</td>
+                    <td class="py-3 px-6 text-center border-r"><a href="#" class="text-blue-500 hover:underline">{{ user.name }}</a></td>
+                    <td class="py-3 px-6 text-center border-r">{{ user.email }}</td>
                     <td class="py-3 px-6 text-center border-r">
-                        <button class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-900">
-                            <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>Show
-                        </button>                   
+                        <button class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-900">
+                            <a href="{{ url_for('user_page',usr_id=user.id) }}" class="flex justify-center items-center gap-2">
+                                <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>
+                                <p class="text-base">User Profile</p>
+                            </a>
+                        </button>               
                     </td>
                 </tr>
-            </tbody>
-            <tbody class="text-gray-700 text-sm font-semibold">
-                <tr class="border-b border-black hover:bg-gray-200">
-                    <td class="py-3 px-6 text-center whitespace-nowrap border-r">2</td>
-                    <td class="py-3 px-6 text-center border-r"><a href="#" class="text-blue-500 hover:underline">Ali</a></td>
-                    <td class="py-3 px-6 text-center border-r">ali@example.com</td>
-                    <td class="py-3 px-6 text-center border-r">
-                        <button class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-900">
-                            <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>Show
-                        </button>                   
-                    </td>
-                </tr>
-            </tbody>
-            <tbody class="text-gray-700 text-sm font-semibold">
-                <tr class="border-b border-black hover:bg-gray-200">
-                    <td class="py-3 px-6 text-center whitespace-nowrap border-r">3</td>
-                    <td class="py-3 px-6 text-center border-r"><a href="#" class="text-blue-500 hover:underline">saeed</a></td>
-                    <td class="py-3 px-6 text-center border-r">saeed@example.com</td>
-                    <td class="py-3 px-6 text-center border-r">
-                        <button class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-900">
-                            <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>Show
-                        </button>                   
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
