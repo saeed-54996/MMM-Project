@@ -91,6 +91,20 @@ def show_single_picture(picture_id):
 
 
 
+#----------------------------------------article system:
+def show_articles():
+    articles = Articles.query.all()
+    return render_template('articles.html',articles=articles)
+
+
+def show_single_article(article_id):
+    return render_template('article.html')
+
+
+
+
+
+
 #----------------------------------------submit sytsem:
 def submit_article():
     if 'user_id' not in session:
