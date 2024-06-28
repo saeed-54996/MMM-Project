@@ -6,7 +6,13 @@
 {% endblock %}
 
 {% block body %}
-<div class="flex justify-between items-center mb-6">
+
+<a href="{{ url_for('articles_page') }}" class="text-gray-900 hover:text-black-700 text-lg font-bold inline-flex items-center mb-5">
+    <iconify-icon icon="ic:round-arrow-back" width="1.8rem" class="mr-2"></iconify-icon>
+    Articles
+</a>
+
+<div class="flex w-full justify-evenly items-center mb-6">
     <div class="text-xl font-bold flex items-center">
         <span class="icon-category mr-2"></span>
         <iconify-icon icon="mdi:filter-outline" width="1.4rem"></iconify-icon>
@@ -21,14 +27,16 @@
 
 <div class="flex justify-center py-8 px-4 sm:px-6 lg:px-8">
     <div class="max-w-4xl w-full bg-white text-black border border-gray-200 p-10 rounded-xl">
-        <h1 class="text-3xl font-bold mb-6">Title</h1>
+        <h1 class="text-3xl font-bold mb-4">Title</h1>
         <p class="text-xl leading-relaxed mb-8">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel vulputate magna. Suspendisse potenti. Etiam non semper magna. Integer ut ante nunc. Curabitur vel arcu vitae libero scelerisque mollis.
         </p>
     </div>
 </div>
-<div class="flex justify-center gap-2 py-4">
-    <div class="text-xl text-black-700">Tags: tag1, tag2</div>
+<div class="flex justify-center text-xl items-center">
+    <span class="icon-tags mr-2"></span>
+    <iconify-icon icon="icon-park-outline:tag" width="1.4rem"></iconify-icon>
+    Tags: {{ tags }}
 </div>
 {% endblock %}
 
