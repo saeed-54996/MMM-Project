@@ -6,25 +6,28 @@
 
 {% block body %}
 <div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
-        <div class="bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Upload Image</h2>
+    <div class="max-w-lg w-full space-y-8">
+        <div class="bg-white p-10 rounded-xl shadow-xl">
+            <h2 class="mt-6 text-center text-3xl font-light text-gray-900 font-bold ">
+                <iconify-icon icon="ph:upload-fill" class="mr-1" width="1.4rem"></iconify-icon>Upload Image
+            </h2>
+            
             <form class="mt-8 space-y-6" method="post" enctype="multipart/form-data" action="{{ url_for('upload_route') }}">
-                <div class="rounded-md shadow-sm -space-y-px">
+                <div class="rounded-md shadow-sm space-y-6">
                     <div>
                         <label for="title" class="sr-only">Title</label>
-                        <input id="title" name="title" type="text" placeholder="Enter title (optional)" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                        <input id="title" name="title" type="text" placeholder="Enter title (optional)" class="appearance-none rounded-md relative block w-full px-3 py-2 border border-black placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg">
                     </div>
                     <div>
                         <label for="file" class="sr-only">Choose File</label>
-                        <input id="file" name="file" type="file" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                        <input id="file" name="file" type="file" required class="appearance-none rounded-md relative block w-full px-3 py-2 border border-black placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg">
                     </div>
                     <div>
                         <label for="description" class="sr-only">Description</label>
-                        <input id="description" name="description" type="text" placeholder="Description" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                        <input id="description" name="description" type="text" placeholder="Description" class="appearance-none rounded-md relative block w-full px-3 pb-20 pt-3  border border-black placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg">
                     </div>
                     <div>
-                        <select id="category-select" name="category" class="appearance-none border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:border-slate-500">
+                        <select id="category-select" name="category" class="appearance-none border border-black rounded-md py-2 px-4 leading-tight focus:outline-none focus:border-slate-500">
                             <!-- Loop through categories -->
                             {% for category in categories %}
                                 <option value="{{ category['id'] }}">{{ category['name'] }}</option>
@@ -33,11 +36,11 @@
                     </div>
                     <div>
                         <label for="tags" class="sr-only">Tags</label>
-                        <input id="tags" name="tags" type="text" placeholder="tags (comma-separated)" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                        <input id="tags" name="tags" type="text" placeholder="tags (comma-separated)" class="appearance-none rounded-md relative block w-full px-3 py-2 border border-black placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-lg">
                     </div>
                 </div>
                 <div>
-                    <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-2xl font-medium font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-800">
                         Upload
                     </button>
                 </div>
