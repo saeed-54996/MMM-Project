@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Manage Categories</title>
+{% endblock %}
+
+{% block body %}
+<a href="{{ url_for('admin_page') }}" class="text-gray-900 hover:text-black-700 text-lg font-bold inline-flex items-center mb-5">
+    <iconify-icon icon="ic:round-arrow-back" width="1.8rem" class="mr-2"></iconify-icon>
+    Back to admin
+</a>
+<div class="flex justify-center mt-10">
+    <div class="w-full max-w-4xl">
+        <h1 class="text-2xl font-bold mb-6 text-center">Manage Categories</h1>
+        <form method="post" action="{{ url_for('manage_categoris_page') }}">
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 border-b">ID</th>
+                        <th class="px-4 py-2 border-b">Name</th>
+                        <th class="px-4 py-2 border-b">Type</th>
+                        <th class="px-4 py-2 border-b">Is Deleted</th>
+                        <th class="px-4 py-2 border-b">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td class="border-t">
+                            <input type="text" name="id" value="{{ category.id }}" readonly class="px-4 py-2 w-full bg-gray-100 border-none">
+                        </td>
+                        <td class="border-t">
+                            <input type="text" name="name_{{ category.id }}" value="{{ category.name }}" class="px-4 py-2 w-full border border-gray-300">
+                        </td>
+                        <td class="border-t">
+                            <input type="text" name="type_{{ category.id }}" value="{{ category.type }}" class="px-4 py-2 w-full border border-gray-300">
+                        </td>
+                        <td class="border-t text-center">
+                            <input type="checkbox" name="is_deleted_{{ category.id }}" {% if category.is_deleted %}checked{% endif %} class="form-checkbox">
+                        </td>
+                        <td class="border-t text-center">
+                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Update</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td class="border-t">
+                            <input type="text" name="new_id" disabled class="px-4 py-2 w-full bg-gray-100 border-none">
+                        </td>
+                        <td class="border-t">
+                            <input type="text" name="new_name" placeholder="New Category Name" class="px-4 py-2 w-full border border-gray-300">
+                        </td>
+                        <td class="border-t">
+                            <input type="text" name="new_type" placeholder="New Category Type" class="px-4 py-2 w-full border border-gray-300">
+                        </td>
+                        <td class="border-t"></td>
+                        <td class="border-t text-center">
+                            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">Add Category</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+{% endblock %}

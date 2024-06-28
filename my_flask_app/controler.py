@@ -220,6 +220,46 @@ def admin_panel():
     else:
         return redirect(url_for('my_profile'))
 
+def manage_categories():
+    if request.method == 'POST':
+        # Handle update category
+        for category_id in request.form.getlist('id'):
+            if category_id:
+                category = Categories.query.get(category_id)
+                category.name = request.form[f'name_{category_id}']
+                category.type = request.form[f'type_{category_id}']
+                category.is_deleted = 1 if request.form.get(f'is_deleted_{category_id}') == 'on' else 0
+                db.session.commit()
+        
+        # Handle add new category
+        new_name = request.form.get('new_name')
+        new_type = request.form.get('new_type')
+        if new_name and new_type:
+            new_category = Categories(name=new_name, type=new_type)
+            db.session.add(new_category)
+            db.session.commit()
+
+        return redirect(url_for('manage_categoris_page'))
+    
+    # Fetch all categories
+    categories = Categories.query.all()
+    return render_template('manage-categories.html', categories=categories)
+
+def get_categories():
+    return Categories.query.all()
+
+def update_category(category_id, name, type, is_deleted):
+    category = Categories.query.get(category_id)
+    category.name = name
+    category.type = type
+    category.is_deleted = is_deleted
+    db.session.commit()
+
+def add_category(name, type):
+    new_category = Categories(name=name, type=type)
+    db.session.add(new_category)
+    db.session.commit()
+
 
 # ------------------------------------------upload a csv file in csv folder
 def csv_upload():
