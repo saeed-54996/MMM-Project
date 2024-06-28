@@ -52,7 +52,7 @@ def submit_article_route():
     return submit_article()
 
 @app.route('/admin/')
-def admin():
+def admin_page():
     return is_admin()
 
 

@@ -34,6 +34,15 @@
             <div class="text-lg font-bold">Upload images</div>
         </div>
     </a>
+    {% if session['role'] == 'admin' %}
+    <a href="{{ url_for('admin_page') }}" class="w-full md:w-1/2 lg:w-1/3 p-4">
+        <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+            <div class="icon-plus mb-4 text-gray-500"></div>
+            <iconify-icon icon="eos-icons:admin-outlined" width="5rem"></iconify-icon>
+            <div class="text-lg font-bold">Admin panel</div>
+        </div>
+    {% endif %}
+    </a>
 </div>
 </main>
 
