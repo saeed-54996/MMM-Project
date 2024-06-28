@@ -2,7 +2,7 @@ from flask import request, session, redirect, url_for, render_template, flash
 import hashlib
 from model import db, Users, Images, Articles,Categories
 import os
-from init import app
+from init import app,or_
 import uuid
 import csv
 
@@ -120,7 +120,9 @@ def submit_article():
         flash('Article successfully submitted', 'success')
         return redirect(url_for('submit_article_route'))
     
-    return render_template('submit_article.html')
+
+    categories = Categories.query.filter(or_(Categories.type == 'all', Categories.type == 'article')).all()
+    return render_template('submit_article.html',categories=categories)
 
 def upload_photo():
     if  not 'user_id' in session:
@@ -167,7 +169,7 @@ def upload_photo():
             else:
                 flash('File type not allowed', 'error')
                 return redirect(request.url)
-    categories = Categories.query.all()
+    categories = Categories.query.filter(or_(Categories.type == 'all', Categories.type == 'image')).all()
     return render_template('upload.html',categories=categories)
 
 def allowed_image_file(filename):
