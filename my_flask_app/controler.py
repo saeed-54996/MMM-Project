@@ -51,6 +51,7 @@ def signup():
             session['email'] = new_user.email
             session['user_id'] = new_user.id
             session['name'] = new_user.name
+            session['role'] = new_user.role
             return redirect(url_for('home'))
     
     return render_template('signup.html')
