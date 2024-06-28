@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/article-styles.css') }}">
+<title>Blank</title>
+{% endblock %}
+
+{% block body %}
+<div class="flex justify-between items-center mb-6">
+    <div class="text-xl font-bold flex items-center">
+        <span class="icon-category mr-2"></span>
+        <iconify-icon icon="mdi:filter-outline" width="1.4rem"></iconify-icon>
+        Articles Category: Category Sample
+    </div>
+    <div class="text-xl gap-2 font-bold flex items-center">
+        <span class="icon-photographer mr-6"></span>
+        <iconify-icon icon="emojione-monotone:pen" width="1.4rem"></iconify-icon>
+        <p>Writer: Airoff </p>
+    </div>
+</div>
+
+<div class="flex justify-center py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl w-full bg-white text-black border border-gray-200 p-10 rounded-xl">
+        <h1 class="text-3xl font-bold mb-6">Title</h1>
+        <p class="text-xl leading-relaxed mb-8">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel vulputate magna. Suspendisse potenti. Etiam non semper magna. Integer ut ante nunc. Curabitur vel arcu vitae libero scelerisque mollis.
+        </p>
+    </div>
+</div>
+<div class="flex justify-center gap-2 py-4">
+    <div class="text-xl text-black-700">Tags: tag1, tag2</div>
+</div>
+{% endblock %}
+
+
