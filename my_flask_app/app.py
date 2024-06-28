@@ -44,7 +44,7 @@ def pictures():
 def picture(picture_id):
     return show_single_picture(picture_id)
 
-@app.route('/articles/')
+@app.route('/articles/',methods=['GET'])
 def articles_page():
     return show_articles()
 

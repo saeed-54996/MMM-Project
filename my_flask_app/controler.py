@@ -87,7 +87,7 @@ def show_pictures():
         images = Images.query.all()
         categories = Categories.query.filter(or_(Categories.type == 'all', Categories.type == 'image')).all()
     else:
-        images = Images.query.filter_by(category_id=category_filter)
+        images = Images.query.filter_by(category_id=category_filter).all()
         categories = Categories.query.filter(or_(Categories.type == 'all', Categories.type == 'image')).all()
     return render_template('pictures.html',images=images,categories=categories)
 
@@ -102,8 +102,14 @@ def show_single_picture(picture_id):
 
 #----------------------------------------article system:
 def show_articles():
-    articles = Articles.query.all()
-    return render_template('articles.html',articles=articles)
+    category_filter = request.args.get('category', 'all')
+    if(category_filter=="all"):
+        articles = Articles.query.all()
+        categories = Categories.query.filter(or_(Categories.type == 'all', Categories.type == 'article')).all()
+    else:
+        articles = Articles.query.filter_by(category_id=category_filter).all()
+        categories = Categories.query.filter(or_(Categories.type == 'all', Categories.type == 'article')).all()
+    return render_template('articles.html',articles=articles,categories=categories)
 
 
 def show_single_article(article_id):
