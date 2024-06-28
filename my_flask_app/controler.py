@@ -77,10 +77,10 @@ def show_pictures():
     category_filter = request.args.get('category', 'all')
     if(category_filter=="all"):
         images = Images.query.all()
-        categories = Categories.query.all()
+        categories = Categories.query.filter(or_(Categories.type == 'all', Categories.type == 'image')).all()
     else:
         images = Images.query.filter_by(category_id=category_filter)
-        categories = Categories.query.all()
+        categories = Categories.query.filter(or_(Categories.type == 'all', Categories.type == 'image')).all()
     return render_template('pictures.html',images=images,categories=categories)
 
 def show_single_picture(picture_id):
