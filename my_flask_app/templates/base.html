@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
@@ -16,6 +17,7 @@
     <header class="bg-white shadow-md py-4">
         <nav class="container mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center space-x-4">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="h-8 w-8">
                 <a href="/" class="text-lg font-bold text-gray-700 hover:text-gray-900">MMM-Project</a>
                 <div class="h-6 border-r border-gray-300 mx-2"></div>
                 <a href="/"
