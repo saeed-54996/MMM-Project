@@ -7,15 +7,33 @@
 
 {% block body %}
 
-<main class="main-content">
-    <h1 class="main-title">Welcome to the Home Page</h1>
-    <p>
+<main class="main-content container mx-auto p-4">
+    <h1 class="text-4xl font-bold text-center mb-8">Welcome to the Home Page</h1>
+    <p class="text-center mb-8">
         {% if email and user_id %}
             Logged in as: {{ email }} (User ID: {{ user_id }})
         {% else %}
             You are not logged in.
         {% endif %}
     </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <a href="/pictures" class="tile bg-white shadow-md rounded-lg flex flex-col items-center p-6 transition duration-300 hover:bg-blue-100">
+            <iconify-icon icon="jam:picture-f" width="3rem" class="mb-4"></iconify-icon>
+            <span class="text-lg font-semibold">Pictures</span>
+        </a>
+        <a href="/articles" class="tile bg-white shadow-md rounded-lg flex flex-col items-center p-6 transition duration-300 hover:bg-blue-100">
+            <iconify-icon icon="ic:round-article" width="3rem" class="mb-4"></iconify-icon>
+            <span class="text-lg font-semibold">Articles</span>
+        </a>
+        <a href="/my-profile" class="tile bg-white shadow-md rounded-lg flex flex-col items-center p-6 transition duration-300 hover:bg-blue-100">
+            <iconify-icon icon="mdi:view-dashboard" width="3rem" class="mb-4"></iconify-icon>
+            <span class="text-lg font-semibold">Dashboard</span>
+        </a>
+        <a href="/my-profile" class="tile bg-white shadow-md rounded-lg flex flex-col items-center p-6 transition duration-300 hover:bg-blue-100">
+            <iconify-icon icon="mdi:post-outline" width="3rem" class="mb-4"></iconify-icon>
+            <span class="text-lg font-semibold">New Post</span>
+        </a>
+    </div>
 </main>
 
 {% endblock %}
