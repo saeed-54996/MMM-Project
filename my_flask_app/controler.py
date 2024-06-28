@@ -5,7 +5,7 @@ import os
 from init import app,or_
 import uuid
 import csv
-
+import csv_reader
 
 #----------------------------------------login system:
 def generate_md5_hash(password):
@@ -204,7 +204,7 @@ def import_articles():
             flash('No selected file', 'error')
             return redirect(request.url)
         
-        if file and allowed_file(file.filename):
+        if file and allowed_csv_file(file.filename):
             try:
                 file_content = file.read().decode('utf-8')
                 csv_reader = csv.reader(file_content.splitlines())
@@ -245,7 +245,7 @@ def import_images():
             flash('No selected file', 'error')
             return redirect(request.url)
         
-        if file and allowed_file(file.filename):
+        if file and allowed_csv_file(file.filename):
             try:
                 file_content = file.read().decode('utf-8')
                 csv_reader = csv.reader(file_content.splitlines())
@@ -272,4 +272,8 @@ def import_images():
             return redirect(request.url)
     return render_template('admin.html')
 
+
+def allowed_csv_file(filename):
+    ALLOWED_EXTENSIONS = {'csv'}
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
