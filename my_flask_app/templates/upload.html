@@ -12,8 +12,8 @@
             <form class="mt-8 space-y-6" method="post" enctype="multipart/form-data" action="{{ url_for('upload_route') }}">
                 <div class="rounded-md shadow-sm -space-y-px">
                     <div>
-                        <label for="custom_filename" class="sr-only">Custom Filename</label>
-                        <input id="custom_filename" name="custom_filename" type="text" placeholder="Enter custom filename (optional)" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                        <label for="title" class="sr-only">Title</label>
+                        <input id="title" name="title" type="text" placeholder="Enter title (optional)" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
                     </div>
                     <div>
                         <label for="file" class="sr-only">Choose File</label>
@@ -24,8 +24,12 @@
                         <input id="description" name="description" type="text" placeholder="Description" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
                     </div>
                     <div>
-                        <label for="category" class="sr-only">Category</label>
-                        <input id="category" name="category" type="text" placeholder="Category" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                        <select id="category-select" name="category" class="appearance-none border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:border-slate-500">
+                            <!-- Loop through categories -->
+                            {% for category in categories %}
+                                <option value="{{ category['id'] }}">{{ category['name'] }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <div>
                         <label for="tags" class="sr-only">Tags</label>

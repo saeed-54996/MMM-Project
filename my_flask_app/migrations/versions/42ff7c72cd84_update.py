@@ -1,8 +1,8 @@
 """update
 
-Revision ID: 5486fc364ead
+Revision ID: 42ff7c72cd84
 Revises: 
-Create Date: 2024-06-27 15:53:59.917941
+Create Date: 2024-06-28 02:17:53.942542
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5486fc364ead'
+revision = '42ff7c72cd84'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -32,16 +32,16 @@ def upgrade():
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('password', sa.Text(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('name')
+    sa.UniqueConstraint('email')
     )
     op.create_table('articles',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('title', sa.String(length=120), nullable=True),
     sa.Column('content', sa.Text(), nullable=False),
-    sa.Column('category', sa.String(length=50), nullable=True),
+    sa.Column('category_id', sa.Integer(), nullable=True),
     sa.Column('keywords', sa.Text(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -50,9 +50,10 @@ def upgrade():
     sa.Column('title', sa.String(length=50), nullable=False),
     sa.Column('path', sa.Text(), nullable=False),
     sa.Column('description', sa.String(length=120), nullable=True),
-    sa.Column('category', sa.String(length=50), nullable=True),
+    sa.Column('category_id', sa.Integer(), nullable=True),
     sa.Column('tags', sa.String(length=50), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
