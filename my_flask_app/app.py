@@ -1,7 +1,7 @@
 from flask import *
 from init import app, db 
 from model import *
-from controler import login, signup ,upload_photo,dashboard,user_profile,show_pictures,show_single_picture,show_articles,show_single_article,show_users,submit_article,admin_panel,csv_upload
+from controler import login, signup ,upload_photo,dashboard,user_profile,show_pictures,show_single_picture,show_articles,show_single_article,show_users,submit_article,admin_panel,csv_upload,manage_categories
 
 @app.route('/')
 def home():
@@ -64,6 +64,10 @@ def submit_article_route():
 @app.route('/admin/', methods=['POST', 'GET'])
 def admin_page():
     return admin_panel()
+
+@app.route('/admin/manage-categoris/', methods=['POST', 'GET'])
+def manage_categoris_page():
+    return manage_categories()
 
 @app.route('/admin/csv-file-upload/', methods=['POST', 'GET'])
 def csv_file_upload():

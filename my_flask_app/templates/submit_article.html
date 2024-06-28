@@ -5,45 +5,46 @@
 {% endblock %}
 
 {% block body %}
-<div class="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
-        <a href="{{ url_for('home') }}" class="text-gray-900 hover:text-black-700 text-lg font-bold inline-flex items-center mb-5">
-            <iconify-icon icon="ic:round-arrow-back" width="1.8rem" class="mr-2"></iconify-icon>
-            Home
-        </a>
+<div class="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-md rounded-md border border-gray-300">
+    <a href="{{ url_for('home') }}" class="text-gray-900 hover:text-black-700 text-lg font-bold inline-flex items-center mb-5">
+        <iconify-icon icon="ic:round-arrow-back" width="1.8rem" class="mr-2"></iconify-icon>
+        Home
+    </a>
     <h2 class="text-2xl font-bold mb-6">Submit Article</h2>
     <form method="post" action="{{ url_for('submit_article_route') }}">
         <div class="mb-4">
             <label for="title" class="block text-gray-700">Title</label>
-            <input type="text" id="title" name="title" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+            <input type="text" id="title" name="title" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm h-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
         </div>
         <div class="mb-4">
             <label for="content" class="block text-gray-700">Content</label>
-            <textarea id="content" name="content" rows="10" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required></textarea>
+            <textarea id="content" name="content" rows="10" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm h-40 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required></textarea>
         </div>
         <div class="mb-4">
-            <select id="category-select" name="category" class="appearance-none border border-gray-400 rounded py-2 px-4 leading-tight focus:outline-none focus:border-slate-500">
+            <label for="category-select" class="block text-gray-700">Category</label>
+            <select id="category-select" name="category" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm h-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                 <!-- Loop through categories -->
                 {% for category in categories %}
-                    <option value="{{ category['id'] }}">{{ category['name'] }}</option>
+                <option value="{{ category['id'] }}">{{ category['name'] }}</option>
                 {% endfor %}
             </select>
         </div>
         <div class="mb-4">
             <label for="keywords" class="block text-gray-700">Keywords</label>
-            <input type="text" id="keywords" name="keywords" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            <input type="text" id="keywords" name="keywords" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm h-10 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
         </div>
         <div class="mb-6">
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Submit</button>
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Submit</button>
         </div>
     </form>
     {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <ul>
-                {% for category, message in messages %}
-                    <li class="{{ category }}">{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+    {% if messages %}
+    <ul>
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     {% endwith %}
 </div>
 {% endblock %}
