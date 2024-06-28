@@ -70,9 +70,10 @@ def dashboard():
     return render_template('my-profile.html')
 
 def user_profile(usr_id):
-    images = Images.query.all()
-    articles = Articles.query.all()
-    return render_template('user.html',images=images,articles=articles)
+    images = Images.query.filter_by(user_id=usr_id).all()
+    articles = Articles.query.filter_by(user_id=usr_id).all()
+    user = Users.query.filter_by(id=usr_id).first()
+    return render_template('user.html',images=images,articles=articles,user=user)
 
 def show_users():
     users = Users.query.all()
