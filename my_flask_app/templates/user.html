@@ -7,22 +7,70 @@
 
 {% block body %}
 
-<a href="{{ url_for('articles_page') }}" class="text-gray-900 hover:text-black-700 text-lg font-bold inline-flex items-center mb-5">
+<a href="{{ url_for('home') }}" class="text-gray-900 hover:text-black-700 text-lg font-bold inline-flex items-center mb-5">
     <iconify-icon icon="ic:round-arrow-back" width="1.8rem" class="mr-2"></iconify-icon>
-    Articles
+    Exit
 </a>
 
-
-<div class="flex flex-wrap lg:flex-nowrap bg-white shadow-lg rounded-lg p-4">
-    <div class="w-full lg:w-2/3 mb-4 lg:mb-0">
-        <div class="bg-gray-100 p-2 rounded-lg shadow-lg">
+<div class="flex justify-center mt-10">
+    <div class="flex flex-col lg:flex-row items-center bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl">
+        <div class="flex-shrink-0 mb-4 lg:mb-0 lg:mr-4">
+            <iconify-icon icon="iconamoon:profile-fill" width="6rem"></iconify-icon>
+        </div>
+        <div class="flex-grow mt-10 items-center rounded-lg p-8 justify-evenly">
+            <h2 class="text-3xl font-bold mb-4">User Information</h2>
+            <p class="text-lg mb-2"><strong>ID:</strong>  user.id </p>
+            <p class="text-lg mb-2"><strong>Name:</strong> user.name </p>
+            <p class="text-lg mb-2"><strong>Email:</strong> user.email </p>
+            <p class="text-lg mb-2"><strong>Role:</strong> user.role</p>
         </div>
     </div>
-    <div class="w-full lg:w-2/3 lg:pl-4">
-        <h2 class="text-3xl font-bold mb-6">Title: des </h2>
-        <p class="text-lg ">des</p>
-    </div>
 </div>
+<table class="min-w-full bg-white shadow-lg mt-10 rounded-lg overflow-hidden border border-black">
+    <thead>
+        <tr class="bg-gray-400 text-black font-bold uppercase text-sm leading-normal">
+            <th class="py-3 px-6 text-left">Code</th>
+            <th class="py-3 px-6 text-left">Title</th>
+            <th class="py-3 px-6 text-left">Author</th>
+            <th class="py-3 px-6 text-left">Category</th>
+            <th class="py-3 px-6 text-left">Actions</th>
+        </tr>
+    </thead>
+    <tbody class="text-gray-700 text-sm font-semibold">
+        {% for article in articles %}
+        <tr class="border-b border-black hover:bg-gray-300">
+            <td class="py-3 px-6 text-left whitespace-nowrap">{{ article['id'] }}</td>
+            <td class="py-3 px-6 text-left"><a href="{{ url_for('singel_article_page', article_id=article['id']) }}" class="text-blue-500 hover:underline">{{ article['title'] }}</a></td>
+            <td class="py-3 px-6 text-left">{{ article.user.name }}</td>
+            <td class="py-3 px-6 text-left">{{ article.category.name }}</td>
+            <td class="py-3 px-6 text-left">
+                <button class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-900">
+                    <a href="{{ url_for('singel_article_page', article_id=article['id']) }}" class="flex justify-center items-center gap-2">
+                        <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>
+                        <p class="text-base">Show article</p>
+                    </a>
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    <div class="flex flex-wrap mt-10 mx-2" id="image-gallery">
+        <!-- Loop through images -->
+        {% for image in images %}
+            <a href="{{ url_for('picture', picture_id=image['id']) }}" class="w-full md:w-1/2 lg:w-1/3 px-2 mb-4 image-item" data-category="{{ image['category'] }}">
+                <div class="bg-white p-4 shadow-lg rounded-lg">
+                    <img src="{{ url_for('static', filename='img/' + image['path']) }}" alt="Image description" class="w-full h-auto mb-4">
+                    <div class="title text-lg font-bold mb-2">{{ image['title'] }}</div>
+                    <div class="description text-sm italic">{{ image['description'] }}</div>
+                </div>
+            </a>
+        {% endfor %}
+        <!-- End of images loop -->
+    </div>
+
+
 
 
 {% endblock %}
