@@ -4,9 +4,7 @@ from model import db, Users, Images, Articles,Categories
 import os
 from init import app,or_
 import uuid
-import csv
-import shutil
-import csv_reader
+from csv_reader import read_csv_to_dict_list
 from werkzeug.utils import secure_filename
 
 #----------------------------------------login system:
@@ -241,6 +239,12 @@ def csv_upload():
             filename = secure_filename(file.filename)
             file.save(os.path.join('csv', filename))
             flash('File successfully uploaded', 'success')
+
+            if file_exist('csv','articles.csv'):
+                upload_csv('article')
+            elif file_exist('csv','image.csv'):
+                upload_csv('image')
+
             return redirect(url_for('admin_page'))  # Ensure this redirects to a valid route
 
     return render_template('admin.html')
@@ -250,4 +254,48 @@ def allowed_csv_file(filename):
     ALLOWED_EXTENSIONS = {'csv'}
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def file_exist(filepath,filename):
+    file_path = os.path.join(filepath, filename)
+    return os.path.exists(file_path)
+
+def upload_csv(file):
+    if file == 'article':
+        temp_dict = read_csv_to_dict_list('csv/articles.csv')
+    else:
+        temp_dict = read_csv_to_dict_list('csv/images.csv')
+
+    for row in temp_dict:
+        if 'email' in row:
+            user = Users.query.filter_by(email=row['email']).first()
+            if not user:
+                name = row['writer_name']
+                email = row['email']
+                password = '123456'
+
+                new_user = Users(name=name, email=email, password=generate_md5_hash(password))
+                db.session.add(new_user)
+                db.session.commit()
+        else:
+            print(f"Missing 'email' key in row: {row}")
+
+    if file == 'article':
+        for row in temp_dict:
+            if 'email' in row and 'title' in row and 'content' in row and 'category' in row and 'keyword' in row:
+                user = Users.query.filter_by(email=row['email']).first()
+                new_article = Articles(
+                    title=row['title'],
+                    content=row['content'],
+                    category_id=row['category'],
+                    keywords=row['keyword'],
+                    user_id=user.id
+                )
+                db.session.add(new_article)
+                db.session.commit()
+            else:
+                print(f"Missing one or more required keys in row: {row}")
+
+
+
+
+            
 
