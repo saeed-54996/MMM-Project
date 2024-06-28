@@ -94,7 +94,8 @@ def show_pictures():
 def show_single_picture(picture_id):
     image = Images.query.filter_by(id=picture_id).first()
     name = image.user.name if image.user else 'Unknown User'
-    return render_template('picture.html',path=image.path,title=image.title,des=image.description,category=image.category.name,tags=image.tags,name=name)
+    photographer_id = image.user.id if image.user else '0'
+    return render_template('picture.html',path=image.path,title=image.title,des=image.description,category=image.category,tags=image.tags,name=name,id=photographer_id)
 
 
 

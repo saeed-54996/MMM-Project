@@ -17,12 +17,12 @@
         <div class="text-xl font-bold flex items-center">
             <span class="icon-category mr-2"></span>
             <iconify-icon icon="carbon:category" width="1.4rem"></iconify-icon>
-            Category: {{ category }}
+            <a href="{{ url_for('pictures') }}?category={{ category.id }}">Category: {{ category.name }}</a>
         </div>
         <div class="text-xl gap-2 font-bold flex items-center">
             <span class="icon-photographer mr-6"></span>
             <iconify-icon icon="entypo:camera" width="1.4rem"></iconify-icon>
-            <p>Photographer: {{ name }}</p>
+            <p><a href="{{ url_for('user_page',usr_id=id) }}">Photographer: {{ name }}</a></p>
         </div>
     </div>
 
