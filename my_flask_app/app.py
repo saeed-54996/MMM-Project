@@ -35,8 +35,12 @@ def pictures():
 def picture(picture_id):
     return show_single_picture(picture_id)
 
-@app.route('/article/')
-def article():
+@app.route('/articles/')
+def articles_page():
+    return render_template('articles.html')
+
+@app.route('/article/<article_id>/')
+def singel_article_page(article_id):
     return render_template('article.html')
 
 @app.route('/writer-photographer/')
