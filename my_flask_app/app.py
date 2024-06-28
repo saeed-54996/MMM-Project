@@ -27,6 +27,12 @@ def logout():
 def my_profile():
     return user_profile()
 
+
+@app.route('/user/')
+def user_page():
+    return render_template('user.html')
+
+
 @app.route('/pictures/',methods=['GET'])
 def pictures():
     return show_pictures()

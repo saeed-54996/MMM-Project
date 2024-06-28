@@ -23,12 +23,12 @@
                 {% for article in articles %}
                 <tr class="border-b border-black hover:bg-gray-300">
                     <td class="py-3 px-6 text-left whitespace-nowrap">{{ article['id'] }}</td>
-                    <td class="py-3 px-6 text-left"><a href="{{ url_for('single_article_page', article_id=article['id']) }}" class="text-blue-500 hover:underline">{{ article['title'] }}</a></td>
+                    <td class="py-3 px-6 text-left"><a href="{{ url_for('singel_article_page', article_id=article['id']) }}" class="text-blue-500 hover:underline">{{ article['title'] }}</a></td>
                     <td class="py-3 px-6 text-left">{{ article.user.name }}</td>
                     <td class="py-3 px-6 text-left">{{ article.category.name }}</td>
                     <td class="py-3 px-6 text-left">
                         <button class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-900">
-                            <a href="{{ url_for('single_article_page', article_id=article['id']) }}" class="flex justify-center items-center gap-2">
+                            <a href="{{ url_for('singel_article_page', article_id=article['id']) }}" class="flex justify-center items-center gap-2">
                                 <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>
                                 <p class="text-base">Show article</p>
                             </a>

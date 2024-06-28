@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+<title>Blank</title>
+{% endblock %}
+
+{% block body %}
+
+<a href="{{ url_for('articles_page') }}" class="text-gray-900 hover:text-black-700 text-lg font-bold inline-flex items-center mb-5">
+    <iconify-icon icon="ic:round-arrow-back" width="1.8rem" class="mr-2"></iconify-icon>
+    Articles
+</a>
+
+
+<div class="flex flex-wrap lg:flex-nowrap bg-white shadow-lg rounded-lg p-4">
+    <div class="w-full lg:w-2/3 mb-4 lg:mb-0">
+        <div class="bg-gray-100 p-2 rounded-lg shadow-lg">
+        </div>
+    </div>
+    <div class="w-full lg:w-2/3 lg:pl-4">
+        <h2 class="text-3xl font-bold mb-6">Title: des </h2>
+        <p class="text-lg ">des</p>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
