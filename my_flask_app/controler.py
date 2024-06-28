@@ -5,7 +5,9 @@ import os
 from init import app,or_
 import uuid
 import csv
+import shutil
 import csv_reader
+from werkzeug.utils import secure_filename
 
 #----------------------------------------login system:
 def generate_md5_hash(password):
@@ -219,93 +221,33 @@ def admin_panel():
         return redirect(url_for('my_profile'))
 
 
-
-def import_articles():
+# ------------------------------------------upload a csv file in csv folder
+def csv_upload():
     if 'user_id' not in session:
         flash('You need to be logged in to import articles', 'error')
         return redirect(url_for('login_route'))
 
-    
     if request.method == 'POST':
-        if 'file' not in request.files:
+        if 'articles_file' not in request.files:
             flash('No file part', 'error')
             return redirect(request.url)
-        
-        file = request.files['file']
-        if file.filename == '':
-            flash('No selected file', 'error')
-            return redirect(request.url)
-        
-        if file and allowed_csv_file(file.filename):
-            try:
-                file_content = file.read().decode('utf-8')
-                csv_reader = csv.reader(file_content.splitlines())
-                for row in csv_reader:
-                    if len(row) < 4:
-                        continue  # Skip rows that don't have enough columns
-                    title, content, category, keywords = row
-                    new_article = Articles(
-                        title=title,
-                        content=content,
-                        category=category,
-                        keywords=keywords,
-                        user_id=session['user_id']
-                    )
-                    db.session.add(new_article)
-                db.session.commit()
-                flash('Articles successfully imported', 'success')
-            except Exception as e:
-                flash(f'An error occurred: {e}', 'error')
-            return redirect(url_for('admin_page'))
-        else:
-            flash('File type not allowed', 'error')
-            return redirect(request.url)
-    return render_template('admin.html')
 
-def import_images():
-    if 'user_id' not in session:
-        flash('You need to be logged in to import images', 'error')
-        return redirect(url_for('login_route'))
-    
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            flash('No file part', 'error')
-            return redirect(request.url)
-        
-        file = request.files['file']
+        file = request.files['articles_file']
         if file.filename == '':
             flash('No selected file', 'error')
             return redirect(request.url)
-        
+
         if file and allowed_csv_file(file.filename):
-            try:
-                file_content = file.read().decode('utf-8')
-                csv_reader = csv.reader(file_content.splitlines())
-                for row in csv_reader:
-                    if len(row) < 6:
-                        continue  # Skip rows that don't have enough columns
-                    path, title, tags, description, category, user_id = row
-                    new_image = Images(
-                        path=path,
-                        title=title,
-                        tags=tags,
-                        description=description,
-                        category=category,
-                        user_id=session['user_id']
-                    )
-                    db.session.add(new_image)
-                db.session.commit()
-                flash('Images successfully imported', 'success')
-            except Exception as e:
-                flash(f'An error occurred: {e}', 'error')
-            return redirect(url_for('admin_page'))
-        else:
-            flash('File type not allowed', 'error')
-            return redirect(request.url)
+            filename = secure_filename(file.filename)
+            file.save(os.path.join('csv', filename))
+            flash('File successfully uploaded', 'success')
+            return redirect(url_for('admin_page'))  # Ensure this redirects to a valid route
+
     return render_template('admin.html')
 
 
 def allowed_csv_file(filename):
     ALLOWED_EXTENSIONS = {'csv'}
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 

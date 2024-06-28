@@ -12,6 +12,9 @@ def read_csv_to_dict_list(file_path):
             
     return dict_list
 
-if __name__ == '__main__':
-    file = read_csv_to_dict_list("csv/articles.csv")
-    print(file)
+# Example usage
+if __name__ == "__main__":
+    file_path = 'data.csv'  # Replace with your CSV file path
+    data = read_csv_to_dict_list(file_path)
+    for row in data:
+        print(row)

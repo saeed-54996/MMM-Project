@@ -8,36 +8,19 @@
 
 <main class="main-content">
     <h1 class="main-title text-lg font-bold">Welcome to the Admin Page</h1>
-    <p>
-        {% if session['email'] and session['user_id'] %}
-            Logged in as: {{ session['email'] }} (User ID: {{ session['user_id'] }})
-        {% else %}
-            You are not logged in.
-        {% endif %}
-    </p>
 </main>
 
 <div class="flex flex-wrap justify-center">
-    <form method="post" enctype="multipart/form-data" action="{{ url_for('login_route') }}" class="w-full md:w-1/2 lg:w-1/3 p-4">
+    <form method="post" enctype="multipart/form-data" action="{{ url_for('csv_file_upload') }}" class="w-full md:w-1/2 lg:w-1/3 p-4">
         <div class="bg-white shadow-lg rounded-lg p-6 text-center">
             <div class="icon-plus mb-4 text-gray-500"></div>
             <iconify-icon icon="mingcute:plus-line" width="5rem"></iconify-icon>
-            <div class="text-lg font-bold mb-4">Upload Articles CSV</div>
-            <input type="file" name="file" class="mt-2 mb-4">
-            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Upload</button>
-        </div>
-    </form>
-
-    <form method="post" enctype="multipart/form-data" action="{{ url_for('login_route') }}" class="w-full md:w-1/2 lg:w-1/3 p-4">
-        <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-            <div class="icon-plus mb-4 text-gray-500"></div>
-            <iconify-icon icon="mingcute:plus-line" width="5rem"></iconify-icon>
-            <div class="text-lg font-bold mb-4">Upload Images CSV</div>
-            <input type="file" name="file" class="mt-2 mb-4">
+            <div class="text-lg font-bold mb-4">Upload Articles and Images CSV</div>
+            <label for="csv_file" class="block mb-2 text-sm font-medium text-gray-700">CSV FILE</label>
+            <input type="file" name="articles_file" id="articles_file" class="mt-2 mb-4" required>
             <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Upload</button>
         </div>
     </form>
 </div>
 </main>
-
 {% endblock %}
