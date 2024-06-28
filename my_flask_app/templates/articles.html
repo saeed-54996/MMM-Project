@@ -17,38 +17,25 @@
                     <th class="py-3 px-6 text-left">Code</th>
                     <th class="py-3 px-6 text-left">Title</th>
                     <th class="py-3 px-6 text-left">Author</th>
-                    <th class="py-3 px-6 text-left">Date</th>
                     <th class="py-3 px-6 text-left">Category</th>
                     <th class="py-3 px-6 text-left">Actions</th>
                 </tr>
             </thead>
             <tbody class="text-gray-700 text-sm font-semibold">
+                {% for article in articles: %}
                 <tr class="border-b border-black hover:bg-gray-300">
-                    <td class="py-3 px-6 text-left whitespace-nowrap">1</td>
-                    <td class="py-3 px-6 text-left"><a href="#" class="text-blue-500 hover:underline">Sample Title</a></td>
-                    <td class="py-3 px-6 text-left">John Doe</td>
-                    <td class="py-3 px-6 text-left">2024-06-26</td>
-                    <td class="py-3 px-6 text-left">Sample Category</td>
+                    <td class="py-3 px-6 text-left whitespace-nowrap">{{ article['id'] }}</td>
+                    <td class="py-3 px-6 text-left"><a href="{{ url_for('singel_article_page', article_id=article['id']) }}" class="text-blue-500 hover:underline">{{ article['title'] }}</a></td>
+                    <td class="py-3 px-6 text-left">{{ article.user.name }}</td>
+                    <td class="py-3 px-6 text-left">{{ article.category.name }}</td>
                     <td class="py-3 px-6 text-left">
-                        <button class="bg-blue-500 flex flex-wrap text-white py-1 px-3 rounded hover:bg-blue-900">
-                            <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>Show
+                        <button class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-900">
+                            <a href="{{ url_for('singel_article_page', article_id=article['id']) }}" class="flex justify-center items-center gap-2">
+                                <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>
+                                <p class="text-base">Show article</p>
+                            </a>
                         </button>
-                
-                </tr>
-            </tbody>
-
-            <tbody class="text-gray-700 text-sm font-semibold">
-                <tr class="border-b border-black hover:bg-gray-300">
-                    <td class="py-3 px-6 text-left whitespace-nowrap">2</td>
-                    <td class="py-3 px-6 text-left"><a href="#" class="text-blue-500 hover:underline">Sample Title</a></td>
-                    <td class="py-3 px-6 text-left">John Doe</td>
-                    <td class="py-3 px-6 text-left">2024-06-26</td>
-                    <td class="py-3 px-6 text-left">Sample Category</td>
-                    <td class="py-3 px-6 text-left">
-                        <button class="bg-blue-500 flex flex-wrap text-white py-1 px-3 rounded hover:bg-blue-900">
-                            <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>Show
-                        </button>
-                    </td>
+                {% endfor %}
                 </tr>
             </tbody>
         </table>
