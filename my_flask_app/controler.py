@@ -176,7 +176,13 @@ def allowed_image_file(filename):
 
 
 def admin_panel():
-    return render_template('admin.html')
+    if 'role' in session:
+        if session['role'] == 'admin':
+            return render_template('admin.html')
+        else:
+            return redirect(url_for('my_profile'))
+    else:
+        return redirect(url_for('my_profile'))
 
 
 
