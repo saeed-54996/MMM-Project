@@ -6,6 +6,8 @@ from init import app
 import uuid
 import csv
 
+
+#----------------------------------------login system:
 def generate_md5_hash(password):
     return hashlib.md5(password.encode()).hexdigest()
 
@@ -56,6 +58,10 @@ def signup():
     
     return render_template('signup.html')
 
+
+
+
+#----------------------------------------profile and Admin system:
 def user_profile():
     if 'email' in session:
         pass
@@ -63,6 +69,10 @@ def user_profile():
         return redirect(url_for('login_route'))
     return render_template('my-profile.html')
 
+
+
+
+#----------------------------------------image system:
 def show_pictures():
     category_filter = request.args.get('category', 'all')
     if(category_filter=="all"):
@@ -78,6 +88,10 @@ def show_single_picture(picture_id):
     name = image.user.name if image.user else 'Unknown User'
     return render_template('picture.html',path=image.path,title=image.title,des=image.description,category=image.category.name,tags=image.tags,name=name)
 
+
+
+
+#----------------------------------------submit sytsem:
 def submit_article():
     if 'user_id' not in session:
         flash('You need to be logged in to submit an article', 'error')
@@ -131,7 +145,7 @@ def upload_photo():
                 return redirect(request.url)
             
             
-            if file and allowed_file(file.filename):
+            if file and allowed_image_file(file.filename):
                 filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
                 filetitle = os.path.splitext(file.filename)[0]
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -156,20 +170,11 @@ def upload_photo():
     categories = Categories.query.all()
     return render_template('upload.html',categories=categories)
 
-
-def allowed_file(filename):
+def allowed_image_file(filename):
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def is_admin():
-    if 'user_id' not in session:
-        flash('You need to be logged in to import articles', 'error')
-        return redirect(url_for('login_route'))
-    
-    if session.get('role') == 'admin':
-        return render_template('admin.html')
-    
-    flash('Your user is not an admin', 'error')
-    return redirect(url_for('my_profile'))
+def admin_panel():
+    return render_template('admin.html')
 
