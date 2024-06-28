@@ -178,3 +178,90 @@ def allowed_image_file(filename):
 def admin_panel():
     return render_template('admin.html')
 
+
+
+def import_articles():
+    if 'user_id' not in session:
+        flash('You need to be logged in to import articles', 'error')
+        return redirect(url_for('login_route'))
+
+    
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part', 'error')
+            return redirect(request.url)
+        
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file', 'error')
+            return redirect(request.url)
+        
+        if file and allowed_file(file.filename):
+            try:
+                file_content = file.read().decode('utf-8')
+                csv_reader = csv.reader(file_content.splitlines())
+                for row in csv_reader:
+                    if len(row) < 4:
+                        continue  # Skip rows that don't have enough columns
+                    title, content, category, keywords = row
+                    new_article = Articles(
+                        title=title,
+                        content=content,
+                        category=category,
+                        keywords=keywords,
+                        user_id=session['user_id']
+                    )
+                    db.session.add(new_article)
+                db.session.commit()
+                flash('Articles successfully imported', 'success')
+            except Exception as e:
+                flash(f'An error occurred: {e}', 'error')
+            return redirect(url_for('admin_page'))
+        else:
+            flash('File type not allowed', 'error')
+            return redirect(request.url)
+    return render_template('admin.html')
+
+def import_images():
+    if 'user_id' not in session:
+        flash('You need to be logged in to import images', 'error')
+        return redirect(url_for('login_route'))
+    
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part', 'error')
+            return redirect(request.url)
+        
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file', 'error')
+            return redirect(request.url)
+        
+        if file and allowed_file(file.filename):
+            try:
+                file_content = file.read().decode('utf-8')
+                csv_reader = csv.reader(file_content.splitlines())
+                for row in csv_reader:
+                    if len(row) < 6:
+                        continue  # Skip rows that don't have enough columns
+                    path, title, tags, description, category, user_id = row
+                    new_image = Images(
+                        path=path,
+                        title=title,
+                        tags=tags,
+                        description=description,
+                        category=category,
+                        user_id=session['user_id']
+                    )
+                    db.session.add(new_image)
+                db.session.commit()
+                flash('Images successfully imported', 'success')
+            except Exception as e:
+                flash(f'An error occurred: {e}', 'error')
+            return redirect(url_for('admin_page'))
+        else:
+            flash('File type not allowed', 'error')
+            return redirect(request.url)
+    return render_template('admin.html')
+
+
