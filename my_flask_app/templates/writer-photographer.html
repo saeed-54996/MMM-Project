@@ -7,67 +7,57 @@
 
 {% block body %}
 
-<main class="main-content">
-    <h1 class="main-title">contents of writer/photographer</h1>
-    <div class="table-container">
-        <table class="info-table">
+<main class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-6 text-center">Contents of Writers/Photographers</h1>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white shadow-lg rounded-lg overflow-hidden border border-black">
             <thead>
-                <tr>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Actions</th>
+                <tr class="bg-gray-400 text-black- font-bold uppercase text-sm leading-normal">
+                    <th class="py-3 px-6 text-center border-r">Code</th>
+                    <th class="py-3 px-6 text-center border-r">Name</th>
+                    <th class="py-3 px-6 text-center border-r">Email</th>
+                    <th class="py-3 px-6 text-center border-r">Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><a href="#">Ali</a></td>
-                    <td>ali@example.com</td>
-                    <td>
-                        <button class="button">ویرایش</button>
-                        <button class="button danger">حذف</button>
+            <tbody class="text-gray-700 text-sm font-semibold">
+                <tr class="border-b border-black hover:bg-gray-200">
+                    <td class="py-3 px-6 text-center whitespace-nowrap border-r">1</td>
+                    <td class="py-3 px-6 text-center border-r"><a href="#" class="text-blue-500 hover:underline">Arsalan</a></td>
+                    <td class="py-3 px-6 text-center border-r">Arsalan@example.com</td>
+                    <td class="py-3 px-6 text-center border-r">
+                        <button class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-900">
+                            <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>Show
+                        </button>                   
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td><a href="#">Reza</a></td>
-                    <td>reza@example.com</td>
-                    <td>
-                        <button class="button">ویرایش</button>
-                        <button class="button danger">حذف</button>
+            </tbody>
+            <tbody class="text-gray-700 text-sm font-semibold">
+                <tr class="border-b border-black hover:bg-gray-200">
+                    <td class="py-3 px-6 text-center whitespace-nowrap border-r">2</td>
+                    <td class="py-3 px-6 text-center border-r"><a href="#" class="text-blue-500 hover:underline">Ali</a></td>
+                    <td class="py-3 px-6 text-center border-r">ali@example.com</td>
+                    <td class="py-3 px-6 text-center border-r">
+                        <button class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-900">
+                            <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>Show
+                        </button>                   
                     </td>
                 </tr>
-                <tr>
-                    <td>3</td>
-                    <td><a href="#">Sara</a></td>
-                    <td>sara@example.com</td>
-                    <td>
-                        <button class="button">ویرایش</button>
-                        <button class="button danger">حذف</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td><a href="#">Mina</a></td>
-                    <td>mina@example.com</td>
-                    <td>
-                        <button class="button">ویرایش</button>
-                        <button class="button danger">حذف</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="code"></td>
-                    <td><input type="text" name="name"></td>
-                    <td><input type="text" name="email"></td>
-                    <td>
-                        <button class="primary-button">افزودن</button>
+            </tbody>
+            <tbody class="text-gray-700 text-sm font-semibold">
+                <tr class="border-b border-black hover:bg-gray-200">
+                    <td class="py-3 px-6 text-center whitespace-nowrap border-r">3</td>
+                    <td class="py-3 px-6 text-center border-r"><a href="#" class="text-blue-500 hover:underline">saeed</a></td>
+                    <td class="py-3 px-6 text-center border-r">saeed@example.com</td>
+                    <td class="py-3 px-6 text-center border-r">
+                        <button class="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-900">
+                            <iconify-icon icon="ci:show" width="1.4rem"></iconify-icon>Show
+                        </button>                   
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <!-- <button id="add-row">افزودن ردیف</button> -->
 </main>
+
 
 {% endblock %}
