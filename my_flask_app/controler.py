@@ -113,7 +113,10 @@ def show_articles():
 
 
 def show_single_article(article_id):
-    return render_template('article.html')
+    article = Articles.query.filter_by(id=article_id).first()
+    name = article.user.name if article.user else 'Unknown User'
+    writer_id = article.user.id if article.user else '0'
+    return render_template('article.html',article=article,category=article.category,name=name,writer_id=writer_id)
 
 
 

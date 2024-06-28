@@ -16,27 +16,27 @@
     <div class="text-xl font-bold flex items-center">
         <span class="icon-category mr-2"></span>
         <iconify-icon icon="mdi:filter-outline" width="1.4rem"></iconify-icon>
-        Articles Category: Category Sample
+        <p><a href="{{ url_for('articles_page') }}?category={{ category.id }}">Article Category: {{ category.name }}</a></p>
     </div>
     <div class="text-xl gap-2 font-bold flex items-center">
         <span class="icon-photographer mr-6"></span>
         <iconify-icon icon="emojione-monotone:pen" width="1.4rem"></iconify-icon>
-        <p>Writer: Airoff </p>
+        <p><a href="{{ url_for('user_page',usr_id=writer_id) }}">Writer: {{name}}</a></p>
     </div>
 </div>
 
 <div class="flex justify-center py-8 px-4 sm:px-6 lg:px-8">
     <div class="max-w-4xl w-full bg-white text-black border border-gray-200 p-10 rounded-xl">
-        <h1 class="text-3xl font-bold mb-4">Title</h1>
+        <h1 class="text-3xl font-bold mb-4">Title: {{ article.title }}</h1>
         <p class="text-xl leading-relaxed mb-8">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel vulputate magna. Suspendisse potenti. Etiam non semper magna. Integer ut ante nunc. Curabitur vel arcu vitae libero scelerisque mollis.
+         {{ article.content }}   
         </p>
     </div>
 </div>
 <div class="flex justify-center text-xl items-center">
     <span class="icon-tags mr-2"></span>
     <iconify-icon icon="icon-park-outline:tag" width="1.4rem"></iconify-icon>
-    Tags: {{ tags }}
+    Keywords: {{ article.keywords }}
 </div>
 {% endblock %}
 
