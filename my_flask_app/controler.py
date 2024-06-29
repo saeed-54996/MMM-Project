@@ -309,27 +309,30 @@ def upload_csv(file):
                 name = row['writer_name']
                 email = row['writer_email']
                 password = '123456'
-
+                category = Categories.query.filter_by(name=row['category']).first()
                 new_user = Users(name=name, email=email, password=generate_md5_hash(password))
                 db.session.add(new_user)
                 db.session.commit()
-        # category = Categories.query.filter_by(name=row['category']).first()
-        # if not category:
-        #     name = row['category']
-        #     type = 'all'
-        #     new_category = Categories(name=name, type=type, is_deleted=0) 
-        #     db.session.add(new_category)
-        #     db.session.commit()
-
+            category = Categories.query.filter_by(name=row['category']).first()
+            if not category:
+                name = row['category']
+                type = 'article'
+                new_category = Categories(name=name, type=type, is_deleted=0) 
+                db.session.add(new_category)
+                db.session.commit()
+            elif category.type == 'image':
+                category.type = 'all'
+                db.session.commit()
 
             
 
         for row in temp_dict:
             user = Users.query.filter_by(email=row['writer_email']).first()
-            
+            category = Categories.query.filter_by(name=row['category']).first()
             new_article = Articles(
                 title=row['title'],
                 content=row['content'],
+                category_id=category.id,
                 keywords=row['keywords'],
                 user_id=user.id
             )
@@ -343,7 +346,6 @@ def upload_csv(file):
 
         for row in temp_dict:
             user = Users.query.filter_by(email=row['photographer_email']).first()
-            category = Categories.query.filter_by(name=row['category']).first()
             if not user:
                 name = row['writer_name']
                 email = row['writer_email']
@@ -353,21 +355,30 @@ def upload_csv(file):
                 db.session.add(new_user)
                 db.session.commit()
             
-            
-            for row in temp_dict:
-                user = Users.query.filter_by(email=row['photographer_email']).first()
-                new_image = Images(
-                    title=row['title'],
-                    path=row['image_path'],
-                    tags=row['tags'],
-                    description=row['description'],
-                    user_id=user.id
-                )
-                db.session.add(new_image)
+            category = Categories.query.filter_by(name=row['category']).first()
+            if not category:
+                name = row['category']
+                type = 'image'
+                new_category = Categories(name=name, type=type, is_deleted=0) 
+                db.session.add(new_category)
+                db.session.commit()
+            elif category.type == 'article':
+                category.type = 'all'
                 db.session.commit()
 
 
-
-
             
+        for row in temp_dict:
+            user = Users.query.filter_by(email=row['photographer_email']).first()
+            category = Categories.query.filter_by(name=row['category']).first()
 
+            new_image = Images(
+                title=row['title'],
+                path=row['image_path'],
+                tags=row['tags'],
+                description=row['description'],
+                category_id=category.id,
+                user_id=user.id
+            )
+            db.session.add(new_image)
+            db.session.commit()
